@@ -1,0 +1,8 @@
+{
+  "name": "travel-app-front",
+  "app_id": "2ca8e1e2",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
