@@ -3,16 +3,74 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>HomeEeEe I'm ion-title</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content class="no-scroll">
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <ion-row justify-content-center>
+      <ion-col col-11>
+        <ion-item>
+          <ion-label floating>Write the title here</ion-label>
+          <ion-input formControlName="title"></ion-input>
+        </ion-item>
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="validation-summary alert alert-danger">
+          <div *ngIf="title.errors.required">
+            Title is required.
+          </div>
+          <!-- <div *ngIf="title.errors.maxlength">
+              Name must be at max 20 characters long.
+            </div> -->
+        </div>
+      </ion-col>
+    </ion-row>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <div formArrayName="postPieces">
+      <!--  margin-bottom -->
+      <section [formGroupName]="i" *ngFor="let piece of postForm.controls.postPieces.controls; let i = index">
+        <ion-item-group>
+          <ion-row justify-content-center>
+            <ion-item-divider col-11 color="light">Piece #{{ i + 1 }}
+              <span float-right ion-button icon-left clear *ngIf="postForm.controls.postPieces.length > 1"
+                (click)="removePostPiece(i)">
+                <ion-icon name="close"></ion-icon>
+                Remove
+              </span>
+            </ion-item-divider>
+          </ion-row>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+          <ion-row justify-content-center>
+            <ion-col col-11>
+              <ion-item class="textarea-item">
+                <ion-label floating>Write your text here</ion-label>
+                <ion-textarea formControlName="text" rows="5"></ion-textarea>
+              </ion-item>
+              <!-- <div *ngIf="text.invalid" class="alert alert-danger">
+                  <div *ngIf="text.errors.maxlength">
+                    Text must be at max 20 characters long.
+                  </div>
+                </div> -->
+            </ion-col>
+          </ion-row>
+          <!-- Allow generated input field to be removed -->
+        </ion-item-group>
+      </section>
+    </div>
+
+    <!-- Allow new input field to be generated/added -->
+    <span ion-button float-left icon-left clear (click)="addNewPostPiece()">
+      <ion-icon name="add"></ion-icon>
+      Add new post piece
+    </span>
+
+
+    <ion-row justify-content-center>
+      <ion-col col-3>
+        <button ion-button block type="submit" [disabled]="!postForm.valid" color="ask">
+          <b>Post Me!</b>
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
