@@ -32,12 +32,19 @@
         <ion-item-group>
           <ion-row justify-content-center>
             <ion-item-divider col-11 color="light">
-              <div style="display: inline-block">Piece #{{ i + 1 }} <div style="display: inline-block"><a item-inner float-right ion-button icon-left clear
+              <!-- <div style="display: inline-block">Piece #{{ i + 1 }} <div style="display: inline-block"><a item-inner float-right ion-button icon-left clear
                     *ngIf="postForm.controls.postPieces.length > 1" (click)="removePostPiece(i)">
                     <ion-icon col-4 name="close"></ion-icon>
                     Remove
                   </a></div>
-              </div>
+              </div> -->
+              Piece #{{ i + 1 }} 
+              <ion-buttons end >
+                  <button ion-button color="primary" *ngIf="postForm.controls.postPieces.length > 1" (click)="removePostPiece(i)">
+                    <ion-icon name="close"></ion-icon>
+                    Remove
+                  </button>
+                </ion-buttons>
               <ion-col>
               </ion-col>
             </ion-item-divider>

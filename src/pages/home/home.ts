@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { Post } from './post.model';
 import { PostPiece } from './post-piece.model';
@@ -32,7 +32,8 @@ export class HomePage implements OnInit {
   newItem: any;
   items: any;
 
-  constructor(private fb: FormBuilder,
+  constructor(private navCtrl: NavController,
+     private fb: FormBuilder,
     private postService: PostService,
     public completeTestService: CompleteTestService) { }
   ngOnInit() {

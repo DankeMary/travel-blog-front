@@ -7,19 +7,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content >
-  <p>
+<ion-content>
+  <button ion-button (click)="createNewPost()">Create New Post</button>
+  <!-- <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
     aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
     sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+  </p> -->
   <ion-list>
     <ion-item *ngFor="let review of reviews">
       <ion-card>
         <ion-item>
           <ion-avatar item-start>
-              <img src="assets/imgs/pic.png">
+            <img src="assets/imgs/pic.png">
           </ion-avatar>
           <h2>{{review.userr.id}}</h2>
           <p>{{review.createdOn | date: 'dd/MMM/yyyy hh:mm a z'}}</p>
@@ -87,7 +88,7 @@
       <ion-card>
         <ion-item>
           <ion-avatar item-start>
-              <img src="assets/imgs/pic.png">
+            <img src="assets/imgs/pic.png">
           </ion-avatar>
           <h2>{{review.userr.id}}</h2>
           <p>{{review.createdOn | date: 'dd/MMM/yyyy hh:mm a z'}}</p>

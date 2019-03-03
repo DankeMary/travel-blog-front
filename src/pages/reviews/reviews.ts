@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PostService } from '../../providers/post-service';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the ReviewsPage page.
@@ -29,6 +30,11 @@ export class ReviewsPage {
       this.reviews = reviews;     
       console.log(this.reviews);
     })
+  }
+
+  createNewPost(){
+    console.log("I'm here");
+    this.navCtrl.push(HomePage);
   }
 
   doInfinite(infiniteScroll) {
