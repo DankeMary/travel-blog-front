@@ -19,7 +19,7 @@
       <ion-card>
         <ion-item>
           <ion-avatar item-start>
-            <img src="../../../resources/img/pic.png">
+              <img src="assets/imgs/pic.png">
           </ion-avatar>
           <h2>{{review.userr.id}}</h2>
           <p>{{review.createdOn | date: 'dd/MMM/yyyy hh:mm a z'}}</p>
@@ -53,7 +53,7 @@
       <ion-card>
         <ion-item>
           <ion-avatar item-start>
-            <img src="../../../resources/img/pic.png">
+            <img src="assets/imgs/pic.png">
           </ion-avatar>
           <h2>{{review.userr.id}}</h2>
           <p>{{review.createdOn | date: 'dd/MMM/yyyy hh:mm a z'}}</p>
@@ -87,7 +87,7 @@
       <ion-card>
         <ion-item>
           <ion-avatar item-start>
-            <img src="../../../resources/img/pic.png">
+              <img src="assets/imgs/pic.png">
           </ion-avatar>
           <h2>{{review.userr.id}}</h2>
           <p>{{review.createdOn | date: 'dd/MMM/yyyy hh:mm a z'}}</p>
@@ -121,7 +121,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page != totalPage">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page!=totalPage">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
