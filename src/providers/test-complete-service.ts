@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class CompleteTestService implements AutoCompleteService {
     labelAttribute = "namee";
+    formValueAttribute = "countryId"
     public API = 'http://localhost:8080';
     public POST_API = this.API + '/makePost';
     public COUNTRY_API = this.API + '/countries';
