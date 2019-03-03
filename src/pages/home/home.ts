@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { Post } from './post.model';
 import { PostPiece } from './post-piece.model';
 import { PostService } from "../../providers/post-service";
+import { CompleteTestService } from "../../providers/test-complete-service";
 
 @IonicPage()
 @Component({
@@ -28,8 +29,11 @@ export class HomePage implements OnInit {
   post: Post;
   postPieces: Array<PostPiece>;
   newItem: any;
+  items: any;
 
-  constructor(private fb: FormBuilder, private postService: PostService) { }
+  constructor(private fb: FormBuilder, 
+    private postService: PostService, 
+    public completeTestService: CompleteTestService) { }
   ngOnInit() {
     this.initForm();
     this.postPiecesCount = 1;
@@ -39,6 +43,7 @@ export class HomePage implements OnInit {
     this.postForm = this.fb.group({
       title: ['', Validators.required],
       /* text: ['', Validators.maxLength(20)], */
+      country: [''],
       postPieces: this.fb.array([
         this.initPostPieceFields()
       ])
@@ -47,7 +52,9 @@ export class HomePage implements OnInit {
 
   public onSubmit() {
     this.convertToModel(this.postForm);
-    this.postService.makePost(this.convertToModel(this.postForm)).then( res => console.log(res)).catch(e => console.log(e));
+    this.postService.makePost(this.convertToModel(this.postForm))
+    .then( res => console.log("Imma res: " + res))
+    .catch(e => console.log("Imma error: " + e));
   }
 
   initPostPieceFields(): FormGroup {
@@ -79,6 +86,8 @@ export class HomePage implements OnInit {
 
   convertToModel(postForm: FormGroup) {
     this.postPieces = new Array<PostPiece>();
+    
+    console.log(this.postForm.controls.country.value);
 
     (<FormArray>this.postForm.controls.postPieces).controls.forEach(element => {
       this.postPieces.push(new PostPiece(element.get("text").value,

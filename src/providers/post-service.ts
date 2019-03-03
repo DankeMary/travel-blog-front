@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { HTTP } from "@ionic-native/http";
 import { Post } from "../pages/home/post.model";
 
 @Injectable()
@@ -9,10 +10,11 @@ export class PostService {
   public POST_API = this.API + '/makePost';
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient /* HTTP */) {
   }
 
   public makePost(post: Post){
+      console.log("Imma title: " + post.title);
       console.log(post);
     return this.http.post<any>(this.POST_API, post, {headers: this.headers}).toPromise();
   }

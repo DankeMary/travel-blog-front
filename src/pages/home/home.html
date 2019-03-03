@@ -65,6 +65,20 @@
     </span>
 
 
+    <ion-row>
+      <ion-toolbar>
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      </ion-toolbar>
+      <ion-list *ngIf>
+        <ion-item *ngFor="let item of items">
+          {{ item }}
+        </ion-item>
+      </ion-list>
+    </ion-row>
+
+    <ion-row>
+      <ion-auto-complete [dataProvider]="completeTestService" formControlName="country"></ion-auto-complete>
+    </ion-row>
     <ion-row justify-content-center>
       <ion-col col-3>
         <button ion-button block type="submit" [disabled]="!postForm.valid" color="ask">

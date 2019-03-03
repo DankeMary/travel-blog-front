@@ -13,6 +13,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePageModule } from "../pages/home/home.module";
 import { HttpClientModule } from '@angular/common/http';
 
+import { AutoCompleteModule } from 'ionic2-auto-complete';
+//import { HTTP } from "@ionic-native/http";
 @NgModule({
   declarations: [
     MyApp,
@@ -20,11 +22,12 @@ import { HttpClientModule } from '@angular/common/http';
     ListPage
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     ReactiveFormsModule,
-    HomePageModule
+    HomePageModule,
+    AutoCompleteModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    //HTTP
   ]
 })
-export class AppModule {}
+export class AppModule { }
