@@ -3,14 +3,22 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { HTTP } from "@ionic-native/http";
 import { Post } from "../pages/home/post.model";
+import { PARAMETERS } from '@angular/core/src/util/decorators';
 
 @Injectable()
 export class PostService {
   public API = 'http://localhost:8080';
-  public POST_API = this.API + '/makePost';
+  public POST_API = this.API + '/posts';
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(public http: HttpClient /* HTTP */) {
+  }
+
+  public getPosts (page: number): Observable<any> {
+    var params = new URLSearchParams();
+    params.append("page", page.toString());  
+    console.log("PARAMS: " + params);  
+    return this.http.get(this.POST_API + "/all?" + params); 
   }
 
   public makePost(post: Post){

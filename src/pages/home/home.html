@@ -31,12 +31,15 @@
       <section [formGroupName]="i" *ngFor="let piece of postForm.controls.postPieces.controls; let i = index">
         <ion-item-group>
           <ion-row justify-content-center>
-            <ion-item-divider col-11 color="light">Piece #{{ i + 1 }}
-              <span float-right ion-button icon-left clear *ngIf="postForm.controls.postPieces.length > 1"
-                (click)="removePostPiece(i)">
-                <ion-icon name="close"></ion-icon>
-                Remove
-              </span>
+            <ion-item-divider col-11 color="light">
+              <div style="display: inline-block">Piece #{{ i + 1 }} <div style="display: inline-block"><a item-inner float-right ion-button icon-left clear
+                    *ngIf="postForm.controls.postPieces.length > 1" (click)="removePostPiece(i)">
+                    <ion-icon col-4 name="close"></ion-icon>
+                    Remove
+                  </a></div>
+              </div>
+              <ion-col>
+              </ion-col>
             </ion-item-divider>
           </ion-row>
 

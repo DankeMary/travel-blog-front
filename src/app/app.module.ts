@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MyApp } from './app.component';
 //import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { ReviewsPage } from '../pages/reviews/reviews';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,7 +20,8 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
   declarations: [
     MyApp,
     //HomePage,
-    ListPage
+    ListPage,
+    ReviewsPage
   ],
   imports: [
     BrowserModule,
@@ -27,13 +29,14 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
     IonicModule.forRoot(MyApp),
     ReactiveFormsModule,
     HomePageModule,
-    AutoCompleteModule
+    AutoCompleteModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     //HomePage,
-    ListPage
+    ListPage,
+    ReviewsPage
   ],
   providers: [
     StatusBar,
