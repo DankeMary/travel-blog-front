@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Новый отзыв</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="no-scroll">
+  
+      
+  <ion-item><ion-title>Обзор</ion-title></ion-item>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <ion-row>
+          <ion-col col-12>
+    <ion-row justify-content-center>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Введите заголовок</ion-label>
+          <ion-input formControlName="title" class="rounded"></ion-input>
+        </ion-item>
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="validator-error padding-left">
+          <div *ngIf="title.errors.required">
+            <p ion-text item-md color="danger" class="validator-error">Это поле является обязательным.</p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row justify-content-center>
+      <ion-col>
+        <ion-item class="textarea-item">
+          <ion-label floating>Введите текст для превью</ion-label>
+          <ion-textarea formControlName="previewTextt" rows="5"></ion-textarea>
+        </ion-item>
+        <div *ngIf="previewTextt.invalid && (previewTextt.dirty || previewTextt.touched)"
+          class="validator-error padding-left">
+          <div *ngIf="previewTextt.errors.required">
+            <p ion-text color="danger" class="validator-error">Это поле является обязательным.</p>
+          </div>
+          <div *ngIf="postForm.get('previewTextt').hasError('maxlength')">
+            <p ion-text color="danger" class="validator-error">Максимальная длина - 150 символов.</p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="centered">
+        <ion-item>
+          <!-- style="width: 150px; max-width: 200px;" -->
+          <ion-label style="max-width: 200px;">Фото превью: *имя картинки длинное*</ion-label>
+          <button item-end style="align-self: flex-end" ion-button outline>Загрузить</button>
+          <!-- <button float-right ion-button outline>Загрузить</button> -->
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    
+  </ion-col>
+</ion-row>
+
+    <ion-item>
+      <ion-title>Содержимое</ion-title>
+    </ion-item>
+    
+    <div formArrayName="postPieces" justify-content-center>
+      <section [formGroupName]="i" *ngFor="let piece of postForm.controls.postPieces.controls; let i = index">
+        <ion-item-group justify-content-center>
+          <ion-row>
+            <ion-card justify-content-center class="centered">
+              <ion-buttons>
+                <button float-right style="background-color: transparent;"
+                  ng-style="{visibility: postForm.controls.postPieces.length > 1 ? visible : hidden}"
+                  *ngIf="postForm.controls.postPieces.length > 1" (click)="removePostPiece(i)">
+                  <ion-icon name="close" color="danger"></ion-icon>
+                </button>
+              </ion-buttons>
+              <!-- <ion-row justify-content-center>
+              <ion-item-divider col-11 color="light">
+                --Piece #{{ i + 1 }} --
+                <ion-buttons>
+                  <button *ngIf="postForm.controls.postPieces.length > 1" (click)="removePostPiece(i)">
+                    <ion-icon name="close"></ion-icon>
+                  </button>
+                </ion-buttons>
+              </ion-item-divider>
+            </ion-row> -->
+
+              <ion-row justify-content-center>
+                <ion-col col-12>
+                  <ion-auto-complete class="autocompl" style="width: 100%" [dataProvider]="placesCompleteService"
+                    formControlName="place"></ion-auto-complete>
+                  <ion-label float-right>
+                    <a href="#">Добавить новое</a>
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+
+              <ion-row justify-content-center>
+                <ion-col col-12>
+                  <ion-item class="textarea-item">
+                    <ion-label floating>Write your text here</ion-label>
+                    <ion-textarea formControlName="textt" rows="5"></ion-textarea>
+                  </ion-item>
+                  <div *ngIf="getPostPiecesFormGroup(i).controls['textt'].invalid"
+                    class="alert alert-danger padding-left">
+                    <div
+                      *ngIf="getPostPiecesFormGroup(i).controls['textt'].touched && getPostPiecesFormGroup(i).controls['textt'].hasError('maxlength')">
+                      <p ion-text color="danger" class="validator-error">Максимальная длина - 200 символов.</p>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="centered">
+                  <ion-item>
+                    <!-- style="width: 150px; max-width: 200px;" -->
+                    <ion-label style="max-width: 200px;">Фото: *имя картинки длинное*</ion-label>
+                    <button item-end style="align-self: flex-end" ion-button outline>Загрузить</button>
+                    <!-- <button float-right ion-button outline>Загрузить</button> -->
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-row>
+        </ion-item-group>
+      </section>
+    </div>
+
+    <!-- Allow new input field to be generated/added -->
+    <ion-row>
+      <span ion-button float-left icon-left clear (click)="addNewPostPiece()">
+        <ion-icon name="add"></ion-icon>
+        Add new post piece
+      </span>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-auto-complete [dataProvider]="placesCompleteService" formControlName="place"></ion-auto-complete>
+    </ion-row> -->
+    <ion-row justify-content-center>
+      <ion-col col-3 class="centered">
+        <button ion-button block type="submit" [disabled]="!postForm.valid" color="ask">
+          <b>Post Me!</b>
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

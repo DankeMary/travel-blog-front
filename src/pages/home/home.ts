@@ -6,6 +6,7 @@ import { PostPiece } from './post-piece.model';
 import { Place } from "./place.model";
 import { PostService } from "../../providers/post-service";
 import { CompleteTestService } from "../../providers/test-complete-service";
+import { AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -18,13 +19,7 @@ export class HomePage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public countryService: CountryService) {
   }
-
-  ionViewDidLoad() {
-    this.countryService.getCountries().subscribe((countries: Array<object>) => {
-      this.countries = countries;
-      console.log(countries);
-    })
-  }*/
+  */
   public postForm: FormGroup;
   postPiecesCount: number;
   post: Post;
@@ -33,13 +28,56 @@ export class HomePage implements OnInit {
   items: any;
 
   constructor(private navCtrl: NavController,
-     private fb: FormBuilder,
+    private fb: FormBuilder,
+    private alertsController: AlertController,
     private postService: PostService,
     public completeTestService: CompleteTestService) { }
   ngOnInit() {
     this.initForm();
     this.postPiecesCount = 1;
   }
+
+  ionViewWillLeave() {
+    /* const confirm = this.alertsController.create({
+      title: 'Use this lightsaber?',
+      message: 'Are you sure you want to leave?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    await confirm.present(); */
+    //this.showConfirm();
+  }
+
+  showConfirm(): Promise<boolean> {
+    return new Promise((resolve, reject) =>{
+      const confirm = this.alertsController.create({
+        title : 'Are you sure ?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler:_=> resolve(true)
+          },
+          {
+            text: 'No',
+            handler:_=> resolve(false)
+          }
+        ]
+      }).present();
+    })
+  }
+
 
   private initForm(): void {
     this.postForm = this.fb.group({
@@ -98,7 +136,7 @@ export class HomePage implements OnInit {
         element.get("attachment").value));
     });
     //this.post = null; //TODO new Post(this.postForm.controls.title.value, this.postPieces);
-    
+
     return this.post;
   }
 }

@@ -1,13 +1,23 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <!-- <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button> hideBackButton  -->
     <ion-title>HomeEeEe I'm ion-title</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="no-scroll">
+  <div class="validator-error">Some error</div>
+  <div style="color: red; padding-top: 0.2rem">some error </div>
+  <div class="alert alert-danger" role="alert">
+    This is a danger alert—check it out!
+  </div>
+  <ion-item>
+    <ion-col col-3>
+      <p style="color: red;">Some error 3</p>
+    </ion-col>
+  </ion-item>
   <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
     <ion-row justify-content-center>
       <ion-col col-11>
@@ -22,6 +32,11 @@
           <!-- <div *ngIf="title.errors.maxlength">
               Name must be at max 20 characters long.
             </div> -->
+        </div>
+        <div class="validation-errors">
+          <div class="error-message" *ngIf="title.invalid && (title.dirty || title.touched)">
+            Title required 2
+          </div>
         </div>
       </ion-col>
     </ion-row>
@@ -38,13 +53,14 @@
                     Remove
                   </a></div>
               </div> -->
-              Piece #{{ i + 1 }} 
-              <ion-buttons end >
-                  <button ion-button color="primary" *ngIf="postForm.controls.postPieces.length > 1" (click)="removePostPiece(i)">
-                    <ion-icon name="close"></ion-icon>
-                    Remove
-                  </button>
-                </ion-buttons>
+              Piece #{{ i + 1 }}
+              <ion-buttons end>
+                <button ion-button color="primary" *ngIf="postForm.controls.postPieces.length > 1"
+                  (click)="removePostPiece(i)">
+                  <ion-icon name="close"></ion-icon>
+                  Remove
+                </button>
+              </ion-buttons>
               <ion-col>
               </ion-col>
             </ion-item-divider>

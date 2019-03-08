@@ -11,32 +11,38 @@ import { ReviewsPage } from '../pages/reviews/reviews';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { PostReviewPageModule } from "../pages/post-review/post-review.module";
 import { HomePageModule } from "../pages/home/home.module";
+
 import { HttpClientModule } from '@angular/common/http';
 
 import { AutoCompleteModule } from 'ionic2-auto-complete';
+//import { PostReviewPage } from '../pages/post-review/post-review';
 //import { HTTP } from "@ionic-native/http";
 @NgModule({
   declarations: [
     MyApp,
     //HomePage,
     ListPage,
-    ReviewsPage
+    ReviewsPage,
+    //PostReviewPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     ReactiveFormsModule,
+    AutoCompleteModule,  
     HomePageModule,
-    AutoCompleteModule,
+    PostReviewPageModule,      
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     //HomePage,
     ListPage,
-    ReviewsPage
+    ReviewsPage,
+    //PostReviewPage
   ],
   providers: [
     StatusBar,

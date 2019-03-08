@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PostService } from '../../providers/post-service';
-import { HomePage } from '../home/home';
-
-/**
- * Generated class for the ReviewsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+//import { HomePage } from '../home/home';
+import { PostReviewPage } from "../post-review/post-review";
 
 @IonicPage()
 @Component({
@@ -27,14 +21,13 @@ export class ReviewsPage {
 
   ionViewDidLoad() {
     this.postService.getPosts(1).subscribe((reviews: Array<object>) => {
-      this.reviews = reviews;     
+      this.reviews = reviews;
       console.log(this.reviews);
     })
   }
 
   createNewPost(){
-    console.log("I'm here");
-    this.navCtrl.push(HomePage);
+    this.navCtrl.push(PostReviewPage);
   }
 
   doInfinite(infiniteScroll) {
